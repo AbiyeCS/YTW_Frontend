@@ -18,9 +18,14 @@ export default function Home() {
     const {id}=useParams()
 
     const deleteUser = async (id) => {
-        await axios.delete(`http://localhost:8080/user/${id}`)
+      // Display confirmation dialog
+      const confirmed = window.confirm("Are you sure you want to delete this user?");
+      
+      if (confirmed) {
+        await axios.delete(`http://localhost:8080/user/${id}`);
         loadUsers();
-    }
+      }
+    };
 
   return (
     <div className="container">
