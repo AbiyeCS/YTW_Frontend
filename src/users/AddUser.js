@@ -44,40 +44,19 @@ export default function AddUser() {
               <label htmlFor="Name" className="form-label">
                 Name
               </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter your name"
-                name="name"
-                value={name}
-                onChange={(e) => onInputChange(e)}
-              />
+              <input type="text" className="form-control" placeholder="Enter your name" name="name" value={name} onChange={(e) => onInputChange(e)} />
             </div>
             <div className="mb-3">
               <label htmlFor="Username" className="form-label">
                 Username
               </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter your username"
-                name="username"
-                value={username}
-                onChange={(e) => onInputChange(e)}
-              />
+              <input type="text" className="form-control" placeholder="Enter your username" name="username" value={username} onChange={(e) => onInputChange(e)} />
             </div>
             <div className="mb-3">
               <label htmlFor="Email" className="form-label">
                 Email
               </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter your email"
-                name="email"
-                value={email}
-                onChange={(e) => onInputChange(e)}
-              />
+              <input type="text" className="form-control" placeholder="Enter your email" name="email" value={email} onChange={(e) => onInputChange(e)} />
             </div>
             <button type="submit" className="btn btn-outline-primary">
               Submit
