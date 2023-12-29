@@ -14,6 +14,37 @@ export default function AddUser() {
 
   const { name, username, email } = user;
 
+  const [errors, setErrors] = useState({
+    name: '',
+    username: '',
+    email: '',
+  });
+
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = { name: '', username: '', email: '' };
+
+    if (!name.trim()) {
+      newErrors.name = 'Name is required';
+      valid = false;
+    }
+
+    if (!username.trim()) {
+      newErrors.username = 'Username is required';
+      valid = false;
+    }
+
+    // Basic email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim() || !emailRegex.test(email)) {
+      newErrors.email = 'Valid email is required';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
@@ -28,9 +59,12 @@ export default function AddUser() {
     // submissions manually, allowing the developer to perform custom actions (such as making an asynchronous request, updating state, etc.) 
     // without triggering a full page reload.
 
-    await axios.post("http://localhost:8080/user", user) // Posts the user object we created to the database
+    if(validateForm()) {
 
-    navigate("/") // navigates back to the home page 
+      await axios.post("http://localhost:8080/user", user) // Posts the user object we created to the database
+
+      navigate("/") // navigates back to the home page 
+    }
   };
 
   
@@ -44,19 +78,22 @@ export default function AddUser() {
               <label htmlFor="Name" className="form-label">
                 Name
               </label>
-              <input type="text" className="form-control" placeholder="Enter your name" name="name" value={name} onChange={(e) => onInputChange(e)} />
+              <input type="text" className={`form-control ${errors.name && 'is-invalid'}`} placeholder="Enter your name" name="name" value={name} onChange={(e) => onInputChange(e)} />
+              {errors.name && <div className="invalid-feedback">{errors.name}</div>} {/* Added Here */}
             </div>
             <div className="mb-3">
               <label htmlFor="Username" className="form-label">
                 Username
               </label>
-              <input type="text" className="form-control" placeholder="Enter your username" name="username" value={username} onChange={(e) => onInputChange(e)} />
+              <input type="text" className={`form-control ${errors.username && 'is-invalid'}`} placeholder="Enter your username" name="username" value={username} onChange={(e) => onInputChange(e)} />
+              {errors.username && <div className="invalid-feedback">{errors.username}</div>} {/* Added Here */}
             </div>
             <div className="mb-3">
               <label htmlFor="Email" className="form-label">
                 Email
               </label>
-              <input type="text" className="form-control" placeholder="Enter your email" name="email" value={email} onChange={(e) => onInputChange(e)} />
+              <input type="text" className={`form-control ${errors.email && 'is-invalid'}`} placeholder="Enter your email" name="email" value={email} onChange={(e) => onInputChange(e)} />
+              {errors.email && <div className="invalid-feedback">{errors.email}</div>} {/* Added Here */}
             </div>
             <button type="submit" className="btn btn-outline-primary">
               Submit
