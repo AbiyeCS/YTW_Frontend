@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import SearchBar from "../layout/SearchBar"; 
 
 export default function Home() {
 
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]); 
 
     useEffect(() => {
         loadUsers();
@@ -13,6 +15,7 @@ export default function Home() {
     const loadUsers= async() => {
         const result = await axios.get("http://localhost:8080/users")
         setUsers(result.data)
+        setFilteredUsers(result.data) 
     };
 
     const {id}=useParams()
@@ -27,8 +30,17 @@ export default function Home() {
       }
     };
 
+    const handleSearch = (searchTerm) => {
+      // Filter users based on the search term
+      const filtered = users.filter((user) =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredUsers(filtered);
+    };
+
   return (
     <div className="container">
+      <SearchBar onSearch={handleSearch} /> {/* Include the SearchBar component */}
       <div className="py-4">
         <table className="table border shadow">
           <thead>
@@ -42,9 +54,9 @@ export default function Home() {
           </thead>
           <tbody>
             {
-                users.map((user,index) => (
-                <tr>
-                    <th scope="row" key={index}>{index +1}</th>
+                filteredUsers.map((user, index) => (
+                  <tr key={index}>
+                    <th scope="row">{index + 1}</th>
                     <td>{user.name}</td>
                     <td>{user.username}</td>
                     <td>{user.email}</td>
