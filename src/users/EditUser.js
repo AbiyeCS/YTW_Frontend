@@ -10,6 +10,7 @@ export default function EditUser() {
     name: "",
     username: "",
     email: "",
+    role: ""
   });
 
   const { name, username, email } = user;
@@ -79,6 +80,20 @@ export default function EditUser() {
                 value={email}
                 onChange={(e) => onInputChange(e)}
               />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="Role" className="form-label">Role</label>
+              <select
+                className="form-control"
+                name="role"
+                value={user.role}
+                onChange={(e) => onInputChange(e)}
+              >
+                <option value="">Select a role</option>
+                <option value="ADMIN">Admin</option>
+                <option value="EMPLOYEE">Employee</option>
+                <option value="PRINCIPAL">Principal</option>
+              </select>
             </div>
             <button type="submit" className="btn btn-outline-primary">
               Submit

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 export default function AddUser() {
 
@@ -10,6 +11,7 @@ export default function AddUser() {
     name: "",
     username: "",
     email: "",
+    role: ""
   });
 
   const { name, username, email } = user;
@@ -19,6 +21,17 @@ export default function AddUser() {
     username: '',
     email: '',
   });
+
+  // State to keep track of the selected role
+  const [selectedRole, setSelectedRole] = useState('Select Role');
+
+  // Function to handle role selection
+  const handleSelect = (role) => {
+    // Convert role to uppercase before setting it as Enum in backend
+  const uppercaseRole = role.toUpperCase();
+    setUser({ ...user, role: uppercaseRole });
+    setSelectedRole(role); // Update the state with the selected role
+  };
 
   const validateForm = () => {
     let valid = true;
@@ -94,6 +107,19 @@ export default function AddUser() {
               </label>
               <input type="text" className={`form-control ${errors.email && 'is-invalid'}`} placeholder="Enter your email" name="email" value={email} onChange={(e) => onInputChange(e)} />
               {errors.email && <div className="invalid-feedback">{errors.email}</div>} {/* Added Here */}
+            </div>
+            <div class="mb-3">
+              <label for="Role" class="form-label">Role</label>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  {selectedRole}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => handleSelect('Principal')}>Principal</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleSelect('Employee')}>Employee</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleSelect('Admin')}>Admin</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
             <button type="submit" className="btn btn-outline-primary">
               Submit

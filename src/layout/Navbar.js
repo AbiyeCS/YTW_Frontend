@@ -21,6 +21,8 @@ export default function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+          <Link className='btn btn-outline-light' to="/viewusers/ADMIN">View Admins</Link>
+          <Link className='btn btn-outline-light' to="/viewusers/EMPLOYEE">View Employees</Link>
           <Link className='btn btn-outline-light' to="/adduser">Add User</Link>
         </div>
       </nav>
