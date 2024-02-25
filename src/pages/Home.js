@@ -10,6 +10,7 @@ export default function Home() {
 
     useEffect(() => {
         loadUsers();
+        document.title= "Home"
     }, []);
 
     const loadUsers= async() => {

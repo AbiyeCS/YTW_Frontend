@@ -16,6 +16,7 @@ export default function ViewUser() {
 
   useEffect(() => {
     loadUser()
+    document.title= "View User"
   }, [])
 
   const loadUser = async () => {
