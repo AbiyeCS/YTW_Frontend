@@ -9,6 +9,8 @@ export default function ViewUsersByRole() {
 
     useEffect(() => {
       loadUsers();
+      // Ensure role is treated as a string and then call toLowerCase()
+      document.title= "View " + String(role).toLowerCase()+"'s";
     }, [role]);
 
 

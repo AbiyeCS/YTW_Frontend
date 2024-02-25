@@ -23,6 +23,7 @@ export default function EditUser() {
 
   useEffect(() => {
     loadUser()
+    document.title= "Edit User"
   }, [])
 
   const loadUser = async () => {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -21,6 +21,10 @@ export default function AddUser() {
     username: '',
     email: '',
   });
+
+  useEffect(() => {
+    document.title= "Add New User"
+  }, [])
 
   // State to keep track of the selected role
   const [selectedRole, setSelectedRole] = useState('Select Role');
