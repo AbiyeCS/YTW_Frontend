@@ -9,6 +9,7 @@ export default function ViewUser() {
         name: "",
         username: "",
         email: "",
+        role: ""
       });
 
       const {id}=useParams()
@@ -40,6 +41,9 @@ export default function ViewUser() {
                     </li>
                     <li className='list-group-item'>
                         <b>Email: {user.email} </b>
+                    </li>
+                    <li className='list-group-item'>
+                        <b>Role: {user.role} </b>
                     </li>
                 </ul>
             </div>
